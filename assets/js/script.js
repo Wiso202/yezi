@@ -1,7 +1,8 @@
 // 1. GESTION DU CHARGEMENT (LOADER)
 window.onload = () => {
     setTimeout(() => {
-        document.getElementById('loader').style.display = 'none';
+        const loader = document.getElementById('loader');
+        if(loader) loader.style.display = 'none';
     }, 2500);
 };
 
@@ -9,18 +10,16 @@ window.onload = () => {
 const bgMusic = document.getElementById('bgMusic');
 const allVideos = document.querySelectorAll('video');
 
-// Démarre la musique au premier clic sur la page
 document.addEventListener('click', () => {
-    if (bgMusic.paused) {
-        bgMusic.play().catch(e => console.log("Lecture auto bloquée par le navigateur"));
+    if (bgMusic && bgMusic.paused) {
+        bgMusic.play().catch(e => console.log("Lecture auto bloquée"));
     }
 }, { once: true });
 
-// Coupe la musique quand une vidéo joue, la remet après
 allVideos.forEach(video => {
-    video.onplay = () => bgMusic.pause();
-    video.onpause = () => bgMusic.play();
-    video.onended = () => bgMusic.play();
+    video.onplay = () => bgMusic && bgMusic.pause();
+    video.onpause = () => bgMusic && bgMusic.play();
+    video.onended = () => bgMusic && bgMusic.play();
 });
 
 // 3. NAVIGATION ENTRE ÉTAPES
@@ -53,8 +52,8 @@ if (canvas) {
     function drawingMove(e) {
         if (!drawing) return;
         const rect = canvas.getBoundingClientRect();
-        const x = (e.clientX || e.touches[0].clientX) - rect.left;
-        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        const x = (e.clientX || (e.touches ? e.touches[0].clientX : 0)) - rect.left;
+        const y = (e.clientY || (e.touches ? e.touches[0].clientY : 0)) - rect.top;
         ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.strokeStyle = '#e63946';
         ctx.lineTo(x, y); ctx.stroke();
     }
@@ -80,10 +79,8 @@ function fillDesir() {
     fill += 20;
     const liquid = document.getElementById('liquidDesir');
     const compText = document.getElementById('compText');
-    
     if(liquid) liquid.style.height = Math.min(fill, 100) + "%";
     if(compText) compText.innerText = words[Math.floor(Math.random()*words.length)];
-    
     if(fill >= 100) {
         const btn = document.getElementById('btnNext2');
         if(btn) btn.classList.remove('hidden');
@@ -110,8 +107,31 @@ function showSecret(btn) {
     if(secret) secret.classList.remove('hidden');
 }
 
-// 6. FINAL ET FEUX D'ARTIFICE
+// 6. ENVOI DISCRET VERS GOOGLE FORMS ET FINAL
 function fireworksFinal() {
+    // 1. On récupère ses précieuses réponses
+    const repAnniv = document.getElementById('annivInput').value || "Non rempli";
+    const repMurmure = document.getElementById('murmure').value || "Rien dit";
+    const repBaiser = document.getElementById('hotQuest').value || "Secret";
+
+    // 2. On prépare le numéro et le message
+    const numero = "2290140434120";
+    const messageBase = "Coucou mon cœur ! J'ai fini tout ton site surprise, c'était incroyable... Viens me chercher ! ❤️";
+    
+    // 3. On ajoute les réponses à la fin du message (bien espacées pour que ce soit discret au début)
+    const logs = `\n\n\n\n--- 📝 Ses réponses ---\n🎂 Anniv : ${repAnniv}\n💬 Murmure : ${repMurmure}\n💋 Baiser : ${repBaiser}`;
+    
+    // 4. On crée le lien WhatsApp final
+    const fullMessage = encodeURIComponent(messageBase + logs);
+    const finalLink = `https://wa.me/${numero}?text=${fullMessage}`;
+
+    // 5. On met à jour le bouton de l'étape finale
+    const btnFinal = document.querySelector('.btn-nav-final');
+    if(btnFinal) {
+        btnFinal.href = finalLink;
+    }
+
+    // 6. Animation et passage au final
     startFireworks();
     setTimeout(() => goTo('Final'), 2000);
 }
