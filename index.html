@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pour Ma Préférée ❤️</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="heart-loader">❤️</div>
+        <p>Préparation de ta surprise...</p>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+    </div>
+
+    <section id="etape1" class="active">
+        <div class="luxury-card fadeIn">
+            <h1 class="gold-title">La Terre & le Cœur</h1>
+            <div class="media-frame">
+                <img src="assets/images/passion.jpg" alt="Passion">
+            </div>
+            <p class="quote">"Regarder la vie pousser à tes côtés est ma plus belle récolte."</p>
+            
+            <div class="game-container">
+                <p class="hint">Dessine un ❤️ pour voir l'excursion...</p>
+                <canvas id="canvas1"></canvas>
+                <div id="videoExcursion" class="hidden zoomIn">
+                    <div class="media-frame">
+                        <video controls class="fitted-media"><source src="assets/videos/atassa.mp4"></video>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <label>Le jour de mon anniversaire ? (JJ/MM)</label>
+                <input type="text" id="annivInput" placeholder="01/01" class="gold-input">
+                <button class="btn-action" onclick="checkAnniv()">Vérifier</button>
+            </div>
+            <button class="btn-nav hidden" id="btnNext1" onclick="goTo(2)">Étape Suivante ➔</button>
+        </div>
+    </section>
+
+    <section id="etape2">
+        <div class="luxury-card slideUp">
+            <h1 class="gold-title">L'Éclat du Jour</h1>
+            <div class="media-frame"><img src="assets/images/belle6.jpg" class="fitted-media"></div>
+            
+            <div class="fiole-section">
+                <div class="fiole-container" onclick="fillDesir()">
+                    <div class="liquid" id="liquidDesir"></div>
+                </div>
+                <div id="compText" class="compliment-popup">Touche la fiole...</div>
+            </div>
+
+            <div class="quiz-container">
+                <p class="question">Ma pensée secrète en te voyant ?</p>
+                <button class="answer-btn" onclick="wrongAnswer(this)">"Elle est mignonne"</button>
+                <button class="answer-btn" onclick="rightAnswer(2, this)">"C'est un ange qui descend ?"</button>
+            </div>
+            <button class="btn-nav hidden" id="btnNext2" onclick="goTo(3)">Mélodie Suivante ➔</button>
+        </div>
+    </section>
+
+    <section id="etape3">
+        <div class="luxury-card">
+            <h1 class="gold-title">Mélodies du Soir</h1>
+            <div class="media-frame"><video controls class="fitted-media"><source src="assets/videos/choriste.mp4"></video></div>
+            <div class="input-section">
+                <label>Murmure-moi quelque chose...</label>
+                <textarea id="murmure" class="gold-input" rows="2"></textarea>
+            </div>
+            <div class="media-frame"><video controls class="fitted-media"><source src="assets/videos/bonne nuit.mp4"></video></div>
+            <button class="btn-nav" onclick="goTo(4)">Continuer ➔</button>
+        </div>
+    </section>
+
+    <section id="etape4">
+        <div class="luxury-card">
+            <h1 class="gold-title">Mon Étudiante</h1>
+            <div class="media-frame"><img src="assets/images/ferme les yeux.jpg" class="fitted-media"></div>
+            <div class="quiz-container">
+                <p class="question">À quoi pensais-tu ici ?</p>
+                <button class="answer-btn" onclick="wrongAnswer(this)">Au cours d'agronomie</button>
+                <button class="answer-btn hot" onclick="showSecret(this)">À ce qu'on va faire ce soir...</button>
+            </div>
+            <div id="secretPhoto" class="hidden zoomIn">
+                <div class="media-frame"><img src="assets/images/plage.jpg" class="fitted-media"></div>
+            </div>
+            <button class="btn-nav" onclick="goTo(5)">Plage & Matrix ➔</button>
+        </div>
+    </section>
+
+    <section id="etape5" class="matrix-theme">
+        <div class="luxury-card dark-card">
+            <h1 class="gold-title gold">Matrix & Sable</h1>
+            <div class="media-frame red-border"><img src="assets/images/sexy.jpg" class="fitted-media"></div>
+            <div class="media-frame red-border"><video controls class="fitted-media"><source src="assets/videos/souvenir.mov"></video></div>
+            <div class="input-section">
+                <label>Où est-ce que j'aime t'embrasser ?</label>
+                <input type="text" id="hotQuest" class="gold-input dark">
+                <button class="btn-action pulse" onclick="fireworksFinal()">L'Apothéose ✨</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="etapeFinal">
+        <div class="final-card zoomIn">
+            <div class="decor-images">
+                <img src="assets/images/peluche.webp" class="sticker-float" alt="Peluche">
+                <img src="assets/images/fleure.jfif" class="sticker-float delayed" alt="Fleur">
+            </div>
+            <h1 class="gold-title">Pour Toujours</h1>
+            <div class="message-box">
+                <p>Tu es ma préférée, ma complice, ma tentation.</p>
+                <p><strong>Le site s'arrête ici, mais notre nuit ne fait que commencer...</strong></p>
+            </div>
+            <a href="https://wa.me/2290140434120?text=J'ai fini le site... viens me chercher ❤️" class="btn-nav-final">RÉCLAMER MON CADEAU 🎁</a>
+        </div>
+    </section>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
