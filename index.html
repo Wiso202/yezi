@@ -10,6 +10,10 @@
 </head>
 <body>
 
+    <audio id="bgMusic" loop>
+        <source src="assets/audio/Justin-Bieber-Die-In-Your-Arms-_Lyrics-Letras_.mp3" type="audio/mpeg">
+    </audio>
+
     <div id="loader">
         <div class="heart-loader">❤️</div>
         <p>Préparation de ta surprise...</p>
@@ -20,12 +24,13 @@
         <div class="luxury-card fadeIn">
             <h1 class="gold-title">La Terre & le Cœur</h1>
             <div class="media-frame">
-                <img src="assets/images/passion.jpg" alt="Passion">
+                <img src="assets/images/passion.jpg" alt="Passion" class="fitted-media">
             </div>
             <p class="quote">"Regarder la vie pousser à tes côtés est ma plus belle récolte."</p>
+            <p class="joke">Tu sais pourquoi je suis jaloux de tes plantes ? Parce qu'elles passent leurs journées à attendre que tu viennes les arroser, alors que moi j'attends juste que tu m'arroses de bisous !</p>
             
             <div class="game-container">
-                <p class="hint">Dessine un ❤️ pour voir l'excursion...</p>
+                <p class="hint">Dessine un ❤️ sur le sable pour voir l'excursion...</p>
                 <canvas id="canvas1"></canvas>
                 <div id="videoExcursion" class="hidden zoomIn">
                     <div class="media-frame">
@@ -46,7 +51,11 @@
     <section id="etape2">
         <div class="luxury-card slideUp">
             <h1 class="gold-title">L'Éclat du Jour</h1>
-            <div class="media-frame"><img src="assets/images/belle6.jpg" class="fitted-media"></div>
+            <div class="media-frame">
+                <img src="assets/images/belle6.jpg" class="fitted-media">
+            </div>
+            <p class="quote">"En te voyant sortir de l'église, j'ai compris que j'avais déjà trouvé mon paradis."</p>
+            <p class="joke">Le prêtre a dû se demander pourquoi le soleil entrait dans l'église... il n'avait pas compris que c'était juste toi qui marchais !</p>
             
             <div class="fiole-section">
                 <div class="fiole-container" onclick="fillDesir()">
@@ -67,12 +76,19 @@
     <section id="etape3">
         <div class="luxury-card">
             <h1 class="gold-title">Mélodies du Soir</h1>
-            <div class="media-frame"><video controls class="fitted-media"><source src="assets/videos/choriste.mp4"></video></div>
+            <p class="quote">"Ta voix est la seule musique dont mon cœur a besoin pour s'endormir."</p>
+            <div class="media-frame">
+                <video controls class="fitted-media"><source src="assets/videos/choriste.mp4"></video>
+            </div>
+            <p class="joke">On dit que la musique adoucit les mœurs, mais ta voix, elle, elle fait surtout battre mon cœur à 200 à l'heure.</p>
+            
             <div class="input-section">
                 <label>Murmure-moi quelque chose...</label>
-                <textarea id="murmure" class="gold-input" rows="2"></textarea>
+                <textarea id="murmure" class="gold-input" rows="2" placeholder="Un secret..."></textarea>
             </div>
-            <div class="media-frame"><video controls class="fitted-media"><source src="assets/videos/bonne nuit.mp4"></video></div>
+            <div class="media-frame">
+                <video controls class="fitted-media"><source src="assets/videos/bonne nuit.mp4"></video>
+            </div>
             <button class="btn-nav" onclick="goTo(4)">Continuer ➔</button>
         </div>
     </section>
@@ -80,14 +96,21 @@
     <section id="etape4">
         <div class="luxury-card">
             <h1 class="gold-title">Mon Étudiante</h1>
-            <div class="media-frame"><img src="assets/images/ferme les yeux.jpg" class="fitted-media"></div>
+            <p class="quote">"Même quand tu rêves, je sais que je suis dedans."</p>
+            <div class="media-frame">
+                <img src="assets/images/ferme les yeux.jpg" class="fitted-media">
+            </div>
+            <p class="joke">Si j'étais ton prof, je te mettrais 20/20... pas pour tes notes, mais pour ton déhanché dans les couloirs de la fac.</p>
+
             <div class="quiz-container">
                 <p class="question">À quoi pensais-tu ici ?</p>
                 <button class="answer-btn" onclick="wrongAnswer(this)">Au cours d'agronomie</button>
                 <button class="answer-btn hot" onclick="showSecret(this)">À ce qu'on va faire ce soir...</button>
             </div>
             <div id="secretPhoto" class="hidden zoomIn">
-                <div class="media-frame"><img src="assets/images/plage.jpg" class="fitted-media"></div>
+                <div class="media-frame">
+                    <img src="assets/images/plage.jpg" class="fitted-media">
+                </div>
             </div>
             <button class="btn-nav" onclick="goTo(5)">Plage & Matrix ➔</button>
         </div>
@@ -96,8 +119,15 @@
     <section id="etape5" class="matrix-theme">
         <div class="luxury-card dark-card">
             <h1 class="gold-title gold">Matrix & Sable</h1>
-            <div class="media-frame red-border"><img src="assets/images/sexy.jpg" class="fitted-media"></div>
-            <div class="media-frame red-border"><video controls class="fitted-media"><source src="assets/videos/souvenir.mov"></video></div>
+            <p class="quote">"La réalité est bien plus chaude que la fiction avec toi."</p>
+            <div class="media-frame red-border">
+                <img src="assets/images/sexy.jpg" class="fitted-media">
+            </div>
+            <p class="joke">Tes lunettes Matrix me permettent de voir à travers tes vêtements ? Ah mince, ça ne marche que dans mon imagination... pour l'instant !</p>
+            
+            <div class="media-frame red-border">
+                <video controls class="fitted-media"><source src="assets/videos/souvenir.mov"></video>
+            </div>
             <div class="input-section">
                 <label>Où est-ce que j'aime t'embrasser ?</label>
                 <input type="text" id="hotQuest" class="gold-input dark">
