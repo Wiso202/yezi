@@ -5,6 +5,7 @@
     --rose-accent: #ff8fa3;
     --blanc: #ffffff;
     --text: #4a0e0e;
+    --shadow: rgba(255, 0, 43, 0.15);
 }
 
 /* Fond de page avec un effet de soie */
@@ -17,6 +18,7 @@ body {
         radial-gradient(at 100% 100%, hsla(355,100%,90%,1) 0, transparent 50%);
     color: var(--text);
     overflow-x: hidden;
+    line-height: 1.6;
 }
 
 /* Loader Minimaliste */
@@ -51,56 +53,88 @@ section.active { display: flex; animation: fadeSlide 0.8s cubic-bezier(0.2, 0.8,
 
 /* La Carte "Nuage" */
 .luxury-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-radius: 40px;
     padding: 35px 25px;
     width: 100%;
     max-width: 380px;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 20px 40px rgba(255, 143, 163, 0.2);
+    box-shadow: 0 20px 40px var(--shadow);
 }
 
 .gold-title {
     font-family: 'Dancing Script', cursive;
     color: var(--rouge-vif);
-    font-size: 2.6rem;
-    margin-bottom: 20px;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Cadre Média Sans Bordures Lourdes */
-/* Le conteneur de l'image */
+/* --- AJOUT DES STYLES POUR LÉGENDES ET BLAGUES --- */
+.quote {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: var(--text);
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.joke {
+    font-size: 0.85rem;
+    background: var(--blanc);
+    padding: 12px;
+    border-radius: 15px;
+    border-left: 4px solid var(--rose-accent);
+    margin: 20px 0;
+    color: #666;
+    font-style: italic;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* Cadre Média */
 .media-frame {
     width: 100%;
-    min-height: 200px; /* Hauteur minimale */
-    max-height: 450px; /* Empêche l'image d'être trop géante sur l'écran */
+    min-height: 200px;
+    max-height: 450px;
     border-radius: 30px;
-    background: #fff; /* Fond blanc si l'image est plus étroite que le cadre */
+    background: #fff;
     margin-bottom: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-    border: 2px solid var(--rose-doux); /* Petite bordure discrète */
+    border: 2px solid var(--rose-doux);
 }
 
-/* L'image à l'intérieur */
-.media-frame img {
+.media-frame img, .fitted-media {
     max-width: 100%;
-    max-height: 450px; /* Doit être la même que celle du cadre */
+    max-height: 450px;
     width: auto;
     height: auto;
-    object-fit: contain; /* C'est LA règle magique : montre l'image ENTIÈRE */
+    object-fit: contain;
     display: block;
+    transition: transform 0.5s ease;
 }
+
+/* Canvas de dessin */
+#canvas1 {
+    background: #fdf2f4;
+    border: 2px dashed var(--rose-accent);
+    border-radius: 20px;
+    cursor: crosshair;
+    touch-action: none;
+    margin: 15px 0;
+}
+
 /* Champs de texte "Soft" */
 .gold-input {
     width: 100%;
     padding: 18px;
-    border: none;
+    border: 2px solid transparent;
     background: var(--rose-doux);
     border-radius: 20px;
     margin-bottom: 15px;
@@ -108,16 +142,18 @@ section.active { display: flex; animation: fadeSlide 0.8s cubic-bezier(0.2, 0.8,
     color: var(--text);
     text-align: center;
     transition: 0.3s;
+    outline: none;
 }
 
 .gold-input:focus {
     background: var(--blanc);
-    box-shadow: 0 0 0 3px var(--rose-accent);
+    border-color: var(--rose-accent);
+    box-shadow: 0 10px 20px var(--shadow);
 }
 
 /* Boutons Flottants */
 .btn-action, .btn-nav, .btn-nav-final {
-    background: var(--rouge-vif);
+    background: linear-gradient(135deg, var(--rouge-vif), #ff4d6d);
     color: white;
     border: none;
     padding: 18px 30px;
@@ -128,32 +164,41 @@ section.active { display: flex; animation: fadeSlide 0.8s cubic-bezier(0.2, 0.8,
     letter-spacing: 1px;
     cursor: pointer;
     box-shadow: 0 8px 25px rgba(255, 0, 43, 0.3);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     width: 100%;
+    margin-top: 10px;
 }
 
 .btn-action:hover, .btn-nav:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(255, 0, 43, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 0, 43, 0.4);
 }
 
 /* Fiole Moderne */
 .fiole-container {
-    width: 50px;
-    height: 90px;
+    width: 55px;
+    height: 95px;
     border: 3px solid var(--rose-accent);
-    border-radius: 25px;
+    border-radius: 10px 10px 25px 25px;
     position: relative;
     overflow: hidden;
     margin: 20px auto;
+    background: rgba(255,255,255,0.5);
 }
 
 .liquid {
     position: absolute;
     bottom: 0; width: 100%;
-    background: linear-gradient(to top, var(--rouge-vif), var(--rose-accent));
-    height: 10%;
+    background: linear-gradient(to top, var(--rouge-vif), #ff758c);
+    height: 15%;
     transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.compliment-popup {
+    font-weight: 700;
+    color: var(--rouge-vif);
+    margin-top: 10px;
+    min-height: 24px;
 }
 
 /* Quiz Style */
@@ -163,8 +208,9 @@ section.active { display: flex; animation: fadeSlide 0.8s cubic-bezier(0.2, 0.8,
     margin: 10px 0;
     border: 1px solid var(--rose-doux);
     border-radius: 20px;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.6);
     font-weight: 600;
+    color: var(--text);
     cursor: pointer;
     transition: 0.3s;
 }
@@ -173,25 +219,47 @@ section.active { display: flex; animation: fadeSlide 0.8s cubic-bezier(0.2, 0.8,
     background: var(--blanc);
     border-color: var(--rouge-vif);
     color: var(--rouge-vif);
+    transform: scale(1.02);
 }
 
 /* Stickers (Peluches/Fleurs) */
+.decor-images {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
 .sticker-float {
-    width: 70px;
-    height: 70px;
+    width: 85px;
+    height: 85px;
     object-fit: contain;
-    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
     animation: floaty 4s infinite ease-in-out;
 }
 
+.delayed { animation-delay: 2s; }
+
 @keyframes floaty {
-    0%, 100% { transform: translateY(0) rotate(0); }
-    50% { transform: translateY(-20px) rotate(10deg); }
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
 }
 
-/* Matrix Theme (Garde le rouge mais fond noir) */
-.matrix-theme { background: #000; }
-.dark-card { background: rgba(20, 20, 20, 0.9) !important; color: white; border: 1px solid var(--rouge-vif); }
+/* Matrix Theme */
+.matrix-theme { background: #0a0a0a; }
+.dark-card { 
+    background: rgba(30, 30, 30, 0.9) !important; 
+    color: white !important; 
+    border: 1px solid var(--rouge-vif);
+}
+.dark-card .joke { background: #222; color: #bbb; border-left-color: var(--rouge-vif); }
+.dark-card .quote { color: var(--rose-accent); }
 
 /* Utilitaires */
 .hidden { display: none !important; }
+
+@keyframes shake {
+    0%, 100% {transform: translateX(0);}
+    25% {transform: translateX(-10px);}
+    75% {transform: translateX(10px);}
+}
